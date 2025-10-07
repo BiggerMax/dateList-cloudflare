@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>日历记事本</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <button id="prevMonth" class="nav-btn">‹</button>
+            <h1 id="currentMonth"></h1>
+            <button id="nextMonth" class="nav-btn">›</button>
+            <div class="header-actions">
+                <button id="exportBtn" class="action-btn">导出Excel</button>
+                <button id="importBtn" class="action-btn">导入Excel</button>
+                <input type="file" id="fileInput" accept=".xlsx,.xls" style="display: none;">
+            </div>
+        </div>
+        
+        <div class="calendar">
+            <div class="weekdays">
+                <div class="weekday">周一</div>
+                <div class="weekday">周二</div>
+                <div class="weekday">周三</div>
+                <div class="weekday">周四</div>
+                <div class="weekday">周五</div>
+            </div>
+            <div class="days" id="calendarDays"></div>
+        </div>
+    </div>
+
+    <!-- 编辑弹窗 -->
+    <div id="editModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 id="modalDate"></h2>
+                <span class="close">&times;</span>
+            </div>
+            <div class="modal-body">
+                <div class="text-inputs">
+                    <div class="input-group">
+                        <input type="text" class="note-input" placeholder="输入备注文字..." maxlength="20">
+                        <div class="style-controls">
+                            <select class="font-select">
+                                <option value="Arial">Arial</option>
+                                <option value="Georgia">Georgia</option>
+                                <option value="Times New Roman">Times New Roman</option>
+                                <option value="Courier New">Courier New</option>
+                                <option value="Verdana">Verdana</option>
+                                <option value="Microsoft YaHei">微软雅黑</option>
+                                <option value="SimSun">宋体</option>
+                                <option value="SimHei">黑体</option>
+                            </select>
+                            <select class="size-select">
+                                <option value="12px">12px</option>
+                                <option value="14px">14px</option>
+                                <option value="16px">16px</option>
+                                <option value="18px">18px</option>
+                                <option value="20px">20px</option>
+                            </select>
+                            <select class="color-select">
+                                <option value="#000000">黑色</option>
+                                <option value="#ff0000">红色</option>
+                                <option value="#008000">绿色</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="input-group">
+                        <input type="text" class="note-input" placeholder="输入备注文字..." maxlength="20">
+                        <div class="style-controls">
+                            <select class="font-select">
+                                <option value="Arial">Arial</option>
+                                <option value="Georgia">Georgia</option>
+                                <option value="Times New Roman">Times New Roman</option>
+                                <option value="Courier New">Courier New</option>
+                                <option value="Verdana">Verdana</option>
+                                <option value="Microsoft YaHei">微软雅黑</option>
+                                <option value="SimSun">宋体</option>
+                                <option value="SimHei">黑体</option>
+                            </select>
+                            <select class="size-select">
+                                <option value="12px">12px</option>
+                                <option value="14px">14px</option>
+                                <option value="16px">16px</option>
+                                <option value="18px">18px</option>
+                                <option value="20px">20px</option>
+                            </select>
+                            <select class="color-select">
+                                <option value="#000000">黑色</option>
+                                <option value="#ff0000">红色</option>
+                                <option value="#008000">绿色</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="input-group">
+                        <input type="text" class="note-input" placeholder="输入备注文字..." maxlength="20">
+                        <div class="style-controls">
+                            <select class="font-select">
+                                <option value="Arial">Arial</option>
+                                <option value="Georgia">Georgia</option>
+                                <option value="Times New Roman">Times New Roman</option>
+                                <option value="Courier New">Courier New</option>
+                                <option value="Verdana">Verdana</option>
+                                <option value="Microsoft YaHei">微软雅黑</option>
+                                <option value="SimSun">宋体</option>
+                                <option value="SimHei">黑体</option>
+                            </select>
+                            <select class="size-select">
+                                <option value="12px">12px</option>
+                                <option value="14px">14px</option>
+                                <option value="16px">16px</option>
+                                <option value="18px">18px</option>
+                                <option value="20px">20px</option>
+                            </select>
+                            <select class="color-select">
+                                <option value="#000000">黑色</option>
+                                <option value="#ff0000">红色</option>
+                                <option value="#008000">绿色</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="input-group">
+                        <input type="text" class="note-input" placeholder="输入备注文字..." maxlength="20">
+                        <div class="style-controls">
+                            <select class="font-select">
+                                <option value="Arial">Arial</option>
+                                <option value="Georgia">Georgia</option>
+                                <option value="Times New Roman">Times New Roman</option>
+                                <option value="Courier New">Courier New</option>
+                                <option value="Verdana">Verdana</option>
+                                <option value="Microsoft YaHei">微软雅黑</option>
+                                <option value="SimSun">宋体</option>
+                                <option value="SimHei">黑体</option>
+                            </select>
+                            <select class="size-select">
+                                <option value="12px">12px</option>
+                                <option value="14px">14px</option>
+                                <option value="16px">16px</option>
+                                <option value="18px">18px</option>
+                                <option value="20px">20px</option>
+                            </select>
+                            <select class="color-select">
+                                <option value="#000000">黑色</option>
+                                <option value="#ff0000">红色</option>
+                                <option value="#008000">绿色</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="input-group">
+                        <input type="text" class="note-input" placeholder="输入备注文字..." maxlength="20">
+                        <div class="style-controls">
+                            <select class="font-select">
+                                <option value="Arial">Arial</option>
+                                <option value="Georgia">Georgia</option>
+                                <option value="Times New Roman">Times New Roman</option>
+                                <option value="Courier New">Courier New</option>
+                                <option value="Verdana">Verdana</option>
+                                <option value="Microsoft YaHei">微软雅黑</option>
+                                <option value="SimSun">宋体</option>
+                                <option value="SimHei">黑体</option>
+                            </select>
+                            <select class="size-select">
+                                <option value="12px">12px</option>
+                                <option value="14px">14px</option>
+                                <option value="16px">16px</option>
+                                <option value="18px">18px</option>
+                                <option value="20px">20px</option>
+                            </select>
+                            <select class="color-select">
+                                <option value="#000000">黑色</option>
+                                <option value="#ff0000">红色</option>
+                                <option value="#008000">绿色</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="input-group">
+                        <input type="text" class="note-input" placeholder="输入备注文字..." maxlength="20">
+                        <div class="style-controls">
+                            <select class="font-select">
+                                <option value="Arial">Arial</option>
+                                <option value="Georgia">Georgia</option>
+                                <option value="Times New Roman">Times New Roman</option>
+                                <option value="Courier New">Courier New</option>
+                                <option value="Verdana">Verdana</option>
+                                <option value="Microsoft YaHei">微软雅黑</option>
+                                <option value="SimSun">宋体</option>
+                                <option value="SimHei">黑体</option>
+                            </select>
+                            <select class="size-select">
+                                <option value="12px">12px</option>
+                                <option value="14px">14px</option>
+                                <option value="16px">16px</option>
+                                <option value="18px">18px</option>
+                                <option value="20px">20px</option>
+                            </select>
+                            <select class="color-select">
+                                <option value="#000000">黑色</option>
+                                <option value="#ff0000">红色</option>
+                                <option value="#008000">绿色</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button id="saveBtn" class="save-btn">保存</button>
+                <button id="cancelBtn" class="cancel-btn">取消</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
