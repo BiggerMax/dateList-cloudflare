@@ -1,0 +1,11 @@
+# API代理配置 - 将API请求转发到后端服务器
+/api/*
+  X-Robots-Tag: noindex
+  Access-Control-Allow-Origin: *
+  Access-Control-Allow-Methods: GET, POST, PUT, DELETE, OPTIONS
+  Access-Control-Allow-Headers: Content-Type, Authorization
+
+# 健康检查端点
+/health
+  X-Robots-Tag: noindex
+  Access-Control-Allow-Origin: *
